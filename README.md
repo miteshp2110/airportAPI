@@ -23,4 +23,45 @@ Response: JSON array containing information for the requested airport, including
   }
 ]
 ```
+Flight Fare Estimation (Disclaimer):
+Estimate potential flight fares between airports in India.
+Important Note: These fares are not real-time data from airlines; they are generated based on an average factor for informational purposes only.
+Use the POST request method to the /flightData endpoint with a JSON request body containing the following fields:
 
+```
+{
+  "fromDate": "YYYY-MM-DD", // Departure date in ISO 8601 format (e.g., 2024-03-19)
+  "from": "Airport name (origin)",
+  "destination": "Airport name (destination)",
+  "seating": "Economy" // Currently supports Economy class only
+}
+```
+Example request body:
+
+```
+{
+  "fromDate": "2024-03-19",
+  "from": "Delhi",
+  "destination": "Mumbai",
+  "seating": "Economy"
+}
+```
+Response: JSON array containing estimated fares from various airlines (company is a placeholder, logo needs to be fetched):
+
+```
+[
+  {
+    "date": "2024-03-19",
+    "source": "Delhi",
+    "destination": "Mumbai",
+    "company": "IndiGo (Placeholder)", // Placeholder for actual company name
+    "companyLogo": "URL to fetch company logo", // Placeholder, requires implementation
+    "hour": 1,
+    "minutes": 25,
+    "seating": "Economy",
+    "fare": 5705, // Estimated fare (not real-time data)
+    "time": 6 // Estimated flight duration in hours
+  },
+  // ... additional estimated fares from other (placeholder) airlines
+]
+```
