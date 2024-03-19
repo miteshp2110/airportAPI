@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<style>
+    .resultDisplay{
+        background-color: aqua;
+        display: none;
+
+    }
+
+    .resultDisplay.show{
+        
+        display: block;
+    }
+    body{
+        background-color: aquamarine;
+    }
+</style>
+
+    <input type="search" placeholder="Enter Source" id="from">
+    <div class="resultDisplay" id="p">
+        
+    </div>
+    <img src="https://static.goindigo.in/content/dam/indigov2/6e-website/homepage/header-logo/icIndigoLogoBlueR-new.svg" alt="svg">
+
+
+    <script>
+        var parent=document.getElementById('p')
+        parent.innerHTML=""
+
+        var x=document.getElementById('from')
+        x.addEventListener('input',()=>{
+            console.log('pressed',x.value)
+            var val=x.value
+            if(val!=""){
+                parent.classList.add('show')
+
+                fetch(`http://localhost:5000/airport/?airportName=${x.value}`,{
+                method:"GET",
+                }).then(response=>response.json()).then(data=>{
+                
+                parent.innerHTML=""
+                
+                data.map((resultElement)=>{
+                    var newElement=document.createElement('div')
+                    newElement.innerHTML=`
+                    <h3>${resultElement['municipality']}</h3>
+                    `
+                    parent.appendChild(newElement)
+                })
+
+
+                }).catch(error=>{
+                console.log('error: ',error)
+                })
+                
+            }
+            else{
+                parent.innerHTML=""
+                parent.classList.remove('show')
+                console.log(parent.classList)
+
+            }
+            
+        })
+
+
+
+        function searchAirport() {
+            var query=document.getElementById('from').value
+            
+            
+            fetch(`http://localhost:5000/airport/?airportName=${query}`,{
+                method:"GET",
+            }).then(response=>response.json()).then(data=>{
+                console.log(data)
+            }).catch(error=>{
+                console.log('error: ',error)
+            })
+            
+        }
+
+    </script>
+    
+</body>
+</html>

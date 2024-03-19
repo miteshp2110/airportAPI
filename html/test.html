@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar Example</title>
+    <style>
+        /* Optional: Add some basic styling */
+        #searchInput {
+            padding: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HTML structure for the search bar -->
+<label for="searchInput">Search:</label>
+<input type="text" id="searchInput" oninput="searchFunction()" placeholder="Type to search...">
+
+<!-- A list of items for demonstration purposes -->
+<ul id="searchList">
+    <li>Apple</li>
+    <li>Banana</li>
+    <li>Cherry</li>
+    <li>Orange</li>
+    <li>Pineapple</li>
+</ul>
+
+<script>
+    // JavaScript function to handle the search operation
+    function searchFunction() {
+        // Get the input value
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('searchInput');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById('searchList');
+        li = ul.getElementsByTagName('li');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = '';
+            } else {
+                li[i].style.display = 'none';
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
