@@ -9,7 +9,7 @@ Retrieve details such as name, IATA code, municipality, and coordinates for airp
 Use the GET request method to the /airport/ endpoint with a query parameter airportName:
 Example: /airport/?airportName=Indore
 Response: JSON array containing information for the requested airport, including:
-
+```
 [
   {
     "_id": "65cb55154fb7fa5aa2def26b",
@@ -22,3 +22,5 @@ Response: JSON array containing information for the requested airport, including
     "type": "medium_airport"
   }
 ]
+```
+
